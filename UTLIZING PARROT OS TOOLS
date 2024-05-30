@@ -1,0 +1,170 @@
+# Tools for Reconnaissance: Utilizing Parrot OS Tools
+
+Reconnaissance is a critical phase in ethical hacking, where you gather as much information as possible about your target. Parrot OS, a security-focused operating system, comes equipped with a variety of powerful tools for this purpose. Below are detailed descriptions of key reconnaissance tools available in Parrot OS, including Nmap, Recon-ng, and others.
+
+## 1. Nmap
+
+### Overview
+Nmap (Network Mapper) is a widely used open-source tool for network discovery and security auditing. It is capable of scanning large networks efficiently and is used to discover hosts and services on a network, thereby creating a "map" of the network.
+
+### Key Features
+- **Host Discovery:** Identifying live hosts on a network.
+- **Port Scanning:** Enumerating open ports on target hosts.
+- **Service Detection:** Determining running services and their versions.
+- **Operating System Detection:** Identifying the operating system of a target.
+- **Scriptable Interaction:** Using Nmap Scripting Engine (NSE) for advanced scanning tasks.
+
+### Usage Examples
+#### Host Discovery
+```bash
+nmap -sn 192.168.1.0/24  # Ping scan to identify live hosts
+```
+
+#### Port Scanning
+```bash
+nmap -sS -p 1-65535 192.168.1.1  # SYN scan on a specific host
+```
+
+#### Service Detection
+```bash
+nmap -sV 192.168.1.1  # Detecting services and versions
+```
+
+#### Operating System Detection
+```bash
+nmap -O 192.168.1.1  # OS detection
+```
+
+#### Scripted Scanning
+```bash
+nmap --script=vuln 192.168.1.1  # Running vulnerability scripts
+```
+
+## 2. Recon-ng
+
+### Overview
+Recon-ng is a full-featured web reconnaissance framework written in Python. It is designed to automate the process of gathering intelligence from various public sources (OSINT).
+
+### Key Features
+- **Modular Framework:** Supports a wide range of modules for different tasks.
+- **Data Storage:** Ability to store collected data in a database.
+- **Interactive Console:** Command-line interface similar to Metasploit.
+- **API Integration:** Interfaces with various APIs for automated data collection.
+
+### Usage Examples
+#### Starting Recon-ng
+```bash
+recon-ng
+```
+
+#### Adding a Workspace
+```bash
+workspaces add example_workspace
+```
+
+#### Adding a Domain
+```bash
+modules load recon/domains-hosts/google_site_web
+options set SOURCE example.com
+run
+```
+
+#### Listing Available Modules
+```bash
+modules search
+```
+
+#### Running a Specific Module
+```bash
+modules load recon/domains-contacts/whois_pocs
+options set SOURCE example.com
+run
+```
+
+## 3. TheHarvester
+
+### Overview
+TheHarvester is an effective tool for gathering email addresses, subdomains, hosts, employee names, open ports, and banners from various public sources such as search engines and PGP key servers.
+
+### Key Features
+- **Multi-Source Searches:** Gathers data from multiple sources (Google, Bing, PGP, LinkedIn, etc.).
+- **Customizable Search:** Allows setting the number of results to fetch.
+- **Integration:** Works well with other reconnaissance tools.
+
+### Usage Examples
+#### Basic Domain Search
+```bash
+theHarvester -d example.com -l 500 -b all
+```
+
+#### Specific Source Search
+```bash
+theHarvester -d example.com -b google
+```
+
+## 4. Maltego
+
+### Overview
+Maltego is an interactive data mining tool that renders directed graphs for link analysis. It is used for gathering and connecting information for investigative tasks.
+
+### Key Features
+- **Graphical Interface:** Visual representation of data relationships.
+- **Transform Hub:** Integration of numerous data sources and services.
+- **Collaboration:** Allows multiple users to work on the same graph simultaneously.
+
+### Usage Examples
+#### Starting Maltego
+Maltego is a GUI application. Start it from the Parrot OS menu:
+```bash
+Applications -> Information Gathering -> Maltego
+```
+
+#### Performing a Basic Search
+1. Open Maltego.
+2. Create a new graph.
+3. Add an entity (e.g., Domain).
+4. Right-click the entity and select the desired transform (e.g., "To DNS Name").
+
+## 5. Shodan
+
+### Overview
+Shodan is a search engine for internet-connected devices. It allows users to find devices based on their IP address, service banners, and metadata.
+
+### Key Features
+- **Internet-Wide Scanning:** Identifies devices connected to the internet.
+- **Service Detection:** Gathers information about services and vulnerabilities.
+- **API Access:** Programmatic access for automated querying.
+
+### Usage Examples
+#### Basic Search
+Visit [Shodan.io](https://www.shodan.io/) and enter your search query (e.g., "apache").
+
+#### Using Shodan CLI
+```bash
+shodan init <API_KEY>
+shodan search apache
+```
+
+## 6. FOCA
+
+### Overview
+FOCA (Fingerprinting Organizations with Collected Archives) is a tool used for extracting metadata and hidden information from documents. It is particularly useful for finding sensitive information in public documents.
+
+### Key Features
+- **Metadata Extraction:** Extracts data from various document types (PDF, DOCX, XLSX, etc.).
+- **Document Analysis:** Identifies sensitive data such as usernames, software versions, and internal IP addresses.
+- **Integration:** Works well with other tools for further analysis.
+
+### Usage Examples
+FOCA is primarily a Windows tool, but it can be run in Parrot OS using Wine.
+
+#### Running FOCA
+1. Install Wine:
+   ```bash
+   sudo apt install wine
+   ```
+2. Download and run FOCA using Wine.
+
+## Conclusion
+
+Parrot OS provides a robust set of tools for performing comprehensive reconnaissance in ethical hacking. From network scanning with Nmap to advanced OSINT with Recon-ng and TheHarvester, these tools equip ethical hackers with the capabilities needed to gather critical information about their targets. Remember to always operate within legal and ethical boundaries, obtaining proper authorization before conducting any reconnaissance activities.
