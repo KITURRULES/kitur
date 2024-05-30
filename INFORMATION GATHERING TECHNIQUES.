@@ -1,0 +1,119 @@
+# Information Gathering Techniques in Ethical Hacking Using Parrot OS
+
+Information gathering, also known as reconnaissance, is the first and crucial phase of ethical hacking. This phase involves collecting as much information as possible about the target system to identify potential vulnerabilities. Parrot OS, with its extensive suite of pre-installed tools, is an excellent platform for performing comprehensive information gathering. Below are some key techniques and tools available in Parrot OS for information gathering:
+
+## 1. Passive Reconnaissance
+
+### 1.1 WHOIS Lookup
+WHOIS lookups provide information about domain registration, including the owner's contact information, registration dates, and more.
+- **Tool:** `whois`
+- **Usage:** 
+  ```bash
+  whois example.com
+  ```
+
+### 1.2 DNS Enumeration
+DNS enumeration helps to gather details about DNS records of a target domain, which can reveal subdomains, mail servers, and more.
+- **Tool:** `dnsenum`
+- **Usage:**
+  ```bash
+  dnsenum example.com
+  ```
+
+### 1.3 Social Media and Public Records
+Gathering information from social media profiles and public records can reveal valuable details about individuals or organizations.
+- **Tool:** `theHarvester`
+- **Usage:**
+  ```bash
+  theHarvester -d example.com -l 500 -b all
+  ```
+
+## 2. Active Reconnaissance
+
+### 2.1 Network Scanning
+Network scanning involves discovering live hosts, open ports, and running services on the target network.
+- **Tool:** `Nmap`
+- **Usage:**
+  ```bash
+  nmap -sP 192.168.1.0/24  # Ping scan to discover live hosts
+  nmap -sS -p 1-65535 192.168.1.1  # SYN scan on a specific host
+  ```
+
+### 2.2 Vulnerability Scanning
+Vulnerability scanning identifies potential vulnerabilities in the target system.
+- **Tool:** `OpenVAS`
+- **Usage:** OpenVAS is a powerful vulnerability scanner with a web-based interface. To use it, start the OpenVAS service and access the web interface.
+  ```bash
+  openvas-start
+  ```
+
+### 2.3 Service Enumeration
+Enumerating services involves gathering detailed information about network services running on the target, such as version numbers and configuration details.
+- **Tool:** `Nmap`, `Nikto`
+- **Usage:**
+  ```bash
+  nmap -sV 192.168.1.1  # Version detection
+  nikto -h http://192.168.1.1  # Web server enumeration
+  ```
+
+## 3. Web Application Reconnaissance
+
+### 3.1 Web Application Scanning
+Web application scanning identifies vulnerabilities in web applications.
+- **Tool:** `Burp Suite`, `OWASP ZAP`
+- **Usage:** Both tools provide GUI interfaces for comprehensive web application testing. Start the tools from Parrot OS menu.
+
+### 3.2 Directory and File Discovery
+Discovering hidden directories and files can reveal sensitive information or entry points.
+- **Tool:** `dirb`, `Gobuster`
+- **Usage:**
+  ```bash
+  dirb http://example.com/
+  gobuster dir -u http://example.com/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+  ```
+
+### 3.3 SSL/TLS Analysis
+Analyzing SSL/TLS configurations helps identify weaknesses in the implementation of secure communications.
+- **Tool:** `sslscan`
+- **Usage:**
+  ```bash
+  sslscan example.com
+  ```
+
+## 4. Wireless Network Reconnaissance
+
+### 4.1 Wireless Network Scanning
+Scanning for wireless networks reveals available Wi-Fi networks, their signal strengths, and security configurations.
+- **Tool:** `airmon-ng`, `airodump-ng`
+- **Usage:**
+  ```bash
+  airmon-ng start wlan0  # Enable monitor mode
+  airodump-ng wlan0mon  # Scan for wireless networks
+  ```
+
+### 4.2 Bluetooth Scanning
+Bluetooth scanning identifies nearby Bluetooth devices and their details.
+- **Tool:** `bluesnarfer`
+- **Usage:**
+  ```bash
+  bluesnarfer -i hci0 -b 00:11:22:33:44:55
+  ```
+
+## 5. Email Harvesting and Phishing
+
+### 5.1 Email Harvesting
+Gathering email addresses from various sources for further phishing attempts.
+- **Tool:** `theHarvester`
+- **Usage:**
+  ```bash
+  theHarvester -d example.com -l 500 -b all
+  ```
+
+### 5.2 Phishing Simulation
+Creating phishing campaigns to test the security awareness of individuals.
+- **Tool:** `Social-Engineer Toolkit (SET)`
+- **Usage:** SET provides a menu-driven interface for creating phishing campaigns. Start SET from the Parrot OS menu.
+
+## Conclusion
+
+Parrot OS offers a rich set of tools for comprehensive information gathering in ethical hacking. These tools and techniques enable ethical hackers to collect vital information about their targets, which is essential for identifying vulnerabilities and planning subsequent penetration testing phases. Remember to always operate within legal and ethical boundaries, obtaining proper authorization before conducting any reconnaissance activities.                                                            
