@@ -1,0 +1,165 @@
+# Module 3: Scanning and Enumeration
+
+## Overview
+
+In ethical hacking, scanning and enumeration are essential phases where an attacker gathers detailed information about the target network, identifies live hosts, open ports, running services, and potential vulnerabilities. Parrot OS, with its comprehensive suite of pre-installed tools, facilitates effective scanning and enumeration processes. This report covers the key tools and techniques used in Parrot OS for network scanning, vulnerability scanning, and service enumeration.
+
+## 1. Network Scanning: Identifying Live Hosts and Open Ports
+
+### Tools
+- **Nmap (Network Mapper)**
+- **Zenmap (GUI for Nmap)**
+- **Masscan**
+
+### Nmap
+
+Nmap is a powerful open-source tool for network exploration and security auditing. It is widely used to discover hosts and services on a computer network.
+
+#### Common Nmap Commands
+
+##### Discover Live Hosts
+```bash
+nmap -sn 192.168.1.0/24  # Ping scan to discover live hosts
+```
+
+##### Scan for Open Ports
+```bash
+nmap -sS -p 1-65535 192.168.1.1  # SYN scan for open ports on a specific host
+```
+
+##### Scan for Specific Ports
+```bash
+nmap -p 22,80,443 192.168.1.1  # Scan specific ports
+```
+
+##### Detect Services and Versions
+```bash
+nmap -sV 192.168.1.1  # Detect services and versions
+```
+
+##### Detect Operating System
+```bash
+nmap -O 192.168.1.1  # OS detection
+```
+
+#### Zenmap
+
+Zenmap is the graphical interface for Nmap. It provides an easy-to-use GUI for configuring and executing Nmap scans.
+
+1. Open Zenmap from the Parrot OS menu: `Applications -> Information Gathering -> zenmap`.
+2. Enter the target IP address or range.
+3. Choose a scan profile (e.g., Intense scan, Quick scan).
+4. Click "Scan" to start the process.
+
+### Masscan
+
+Masscan is known for its speed and efficiency in scanning large IP address ranges.
+
+#### Common Masscan Commands
+
+##### Basic Scan for Open Ports
+```bash
+masscan -p0-65535 192.168.1.0/24 --rate=1000  # Scan for open ports in a subnet
+```
+
+##### Scan a Specific IP Address
+```bash
+masscan 192.168.1.1 -p80,443 --rate=1000  # Scan specific ports on a specific host
+```
+
+## 2. Vulnerability Scanning: Using Tools Like OpenVAS
+
+### Tools
+- **OpenVAS (Open Vulnerability Assessment System)**
+- **Nessus (commercial alternative)**
+
+### OpenVAS
+
+OpenVAS is a full-featured vulnerability scanner capable of detecting security issues in the target systems.
+
+#### Installation and Setup
+
+1. **Start OpenVAS Service:**
+   ```bash
+   sudo gvm-setup
+   sudo gvm-start
+   ```
+
+2. **Access OpenVAS Web Interface:**
+   Open a web browser and go to `https://localhost:9392`.
+
+3. **Login:**
+   Use the credentials created during setup.
+
+4. **Create a New Scan:**
+   - Go to `Scans -> Tasks -> New Task`.
+   - Enter the target IP range or domain.
+   - Choose a scan configuration (e.g., Full and fast).
+   - Start the scan.
+
+5. **Review Results:**
+   Once the scan is complete, review the identified vulnerabilities, their severity, and suggested remediation steps.
+
+## 3. Service Enumeration: Gathering Detailed Information About Services
+
+### Tools
+- **Nmap**
+- **Netcat**
+- **Nikto**
+- **Enum4linux**
+
+### Nmap for Service Enumeration
+
+Nmap can be used to gather detailed information about services running on the target system.
+
+#### Service Detection
+```bash
+nmap -sV 192.168.1.1  # Detecting services and versions
+```
+
+#### Script Scanning for Detailed Information
+```bash
+nmap -sC 192.168.1.1  # Using default scripts for detailed service information
+```
+
+### Netcat
+
+Netcat is a versatile networking tool used for reading and writing data across network connections.
+
+#### Banner Grabbing
+```bash
+nc -v 192.168.1.1 80  # Connect to a web server and grab the banner
+```
+
+### Nikto
+
+Nikto is a web server scanner that tests for various vulnerabilities.
+
+#### Scanning a Web Server
+```bash
+nikto -h http://192.168.1.1  # Scan a web server for vulnerabilities
+```
+
+### Enum4linux
+
+Enum4linux is a tool for enumerating information from Windows and Samba systems.
+
+#### Basic Enumeration
+```bash
+enum4linux 192.168.1.1  # Enumerate information from a Windows or Samba system
+```
+
+### Detailed Enumeration
+```bash
+enum4linux -a 192.168.1.1  # Perform detailed enumeration
+```
+
+## Conclusion
+
+Parrot OS provides a rich suite of tools for scanning and enumeration,
+essential phases in ethical hacking. By using tools like Nmap, Masscan,
+OpenVAS, Netcat, Nikto, and Enum4linux, an ethical hacker can gather 
+comprehensive information about the target network, identify live hosts
+, discover open ports, detect vulnerabilities, and enumerate detailed
+service information. These tools empower security professionals to effectively
+assess and secure their network environments.                                                                                
